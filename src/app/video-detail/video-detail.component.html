@@ -1,3 +1,14 @@
+<h2>
+  {{ slug }}
+  <span class="date">{{ todayDate | date: "dd/MM/yy" }}</span>
+</h2>
+
+<iframe *ngIf="embed" width="560" height="315" [src]="getEmbedUrl(embed) | safe" frameborder="0" allowfullscreen></iframe>
+
+<p *ngIf="!embed">
+  no such video!
+</p>
+
 <p class="angular4">
   video-detail works!
 </p>

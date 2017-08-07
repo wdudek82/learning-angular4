@@ -1,13 +1,18 @@
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  <head>-->
-
-<nav class="navbar nav-default">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <h2>Navigation | </h2>
-      <li *ngFor="let item of menuList">
-        <a href="{{ item.slug }}" *ngIf="item.slug != 'item-3'">{{ item.name }}</a>
-        <a href="{{ item.slug }}" *ngIf="item.slug == 'item-3'" style="color:red;">{{ item.name }}</a>
-      </li>
-    </ul>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="http://blog.getbootstrap.com/favicon.ico" style="width:20px; height:20px;">
+      </a>
+      <ul class="nav navbar-nav" *ngFor="let item of menuList">
+        <li>
+          <a href="{{ item.slug }}" *ngIf="item.slug != 'item-3'">{{ item.name }}</a>
+          <a href="{{ item.slug }}" *ngIf="item.slug == 'item-3'" style="color:red;">{{ item.name }}</a>
+        </li>
+
+        <!--<iframe width="560" height="315" [src]="getEmbedUrl(item.embed)" frameborder="0" allowfullscreen></iframe>-->
+      </ul>
+    </div>
   </div>
 </nav>
+
