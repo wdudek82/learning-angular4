@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 // third party modules
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppComponent } from './app.component';
@@ -13,18 +14,21 @@ import { VideoListComponent } from './video-list/video-list.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SafePipe } from './utility/safe.pipe';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VideoListComponent,
-    VideoDetailComponent,
+    HomeComponent,
     NavbarComponent,
     SafePipe,
+    VideoDetailComponent,
+    VideoListComponent,
   ],
   imports: [
     // bootstrap 3
     BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
     CollapseModule.forRoot(),
 
     BrowserModule,
