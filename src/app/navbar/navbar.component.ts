@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   menuList = [
     {
@@ -36,9 +37,20 @@ export class NavbarComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  private routeSub: any;
+  query: string;
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.routeSub = this.route.params
+      .subscribe(params => {
+        console.log(params);
+        this.query = params.q;
+      });
   }
 
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
+  }
 }

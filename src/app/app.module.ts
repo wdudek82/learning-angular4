@@ -16,6 +16,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SafePipe } from './utility/safe.pipe';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
+import { SearchDetailComponent } from './search-detail/search-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { SearchComponent } from './search/search.component';
     VideoDetailComponent,
     VideoListComponent,
     SearchComponent,
+    SearchDetailComponent,
   ],
   imports: [
     // bootstrap 3

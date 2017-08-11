@@ -6,3 +6,6 @@
   color: orangered;
 }
 
+.search-inline .navbar-left {
+  float: none!important;
+}
