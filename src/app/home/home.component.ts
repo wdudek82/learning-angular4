@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http } from '@angular/http';
 
 
 @Component({
@@ -7,30 +8,20 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
-  imageList = [
-    {
-      url: 'http://valor-software.com/ngx-bootstrap/assets/images/nature/3.jpg',
-      title: 'Image 1',
-      link: './videos/video-3',
-    },
-    {
-      url: 'http://valor-software.com/ngx-bootstrap/assets/images/nature/1.jpg',
-      title: 'Image 2',
-      link: './videos/video-1',
-    },
-    {
-      url: 'http://valor-software.com/ngx-bootstrap/assets/images/nature/2.jpg',
-      title: 'Image 3',
-      link: './videos/video-2',
-    },
-  ];
+  private req: any;
+  imageList: [any];
   prevented = false;
 
-  constructor(private router: Router) { }
+  constructor(private http: Http, private router: Router) { }
 
   ngOnInit() {
+    this.req = this.http.get('assets/json/images.json')
+      .subscribe(data => {
+        console.log(data.json());
+        this.imageList = data.json();
+      });
   }
 
   preventNormal(event: MouseEvent, tag1: any, tag2: any, image: any) {
@@ -50,6 +41,10 @@ export class HomeComponent implements OnInit {
       alert('prevented!');
       this.router.navigate(['./videos']);  // redirection
     }
+  }
+
+  ngOnDestroy() {
+    this.req.unsubscribe();
   }
 
 }

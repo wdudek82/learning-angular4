@@ -15,6 +15,7 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SafePipe } from './utility/safe.pipe';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HomeComponent } from './home/home.component';
     SafePipe,
     VideoDetailComponent,
     VideoListComponent,
+    SearchComponent,
   ],
   imports: [
     // bootstrap 3

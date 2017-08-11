@@ -35,12 +35,12 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
         });
       });
 
-    this.req = this.http.get('http://localhost:8000/api/todo/task-list/3/')
-      .subscribe(data => {
-        console.log(data.json());
-        this.todos = data.json()['tasks'];
-        this.todos.forEach(item => console.log(item));
-      });
+    // this.req = this.http.get('http://localhost:8000/api/todo/task-list/3/')
+    //   .subscribe(data => {
+    //     console.log(data.json());
+    //     this.todos = data.json()['tasks'];
+    //     this.todos.forEach(item => console.log(item));
+    //   });
   }
 
   public getEmbedUrl(embedUrl: string) {
