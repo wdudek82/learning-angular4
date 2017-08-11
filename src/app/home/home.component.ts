@@ -14,19 +14,16 @@ export class HomeComponent implements OnInit {
       url: 'http://valor-software.com/ngx-bootstrap/assets/images/nature/3.jpg',
       title: 'Image 1',
       link: './videos/video-3',
-      tag: '#imageOne'
     },
     {
       url: 'http://valor-software.com/ngx-bootstrap/assets/images/nature/1.jpg',
       title: 'Image 2',
       link: './videos/video-1',
-      tag: '#imageTwo'
     },
     {
       url: 'http://valor-software.com/ngx-bootstrap/assets/images/nature/2.jpg',
       title: 'Image 3',
       link: './videos/video-2',
-      tag: `#imageThree`
     },
   ];
   prevented = false;

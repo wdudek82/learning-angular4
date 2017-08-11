@@ -12,3 +12,10 @@
 <p class="angular4">
   video-detail works!
 </p>
+
+<ul *ngFor="let todo of todos">
+  <li *ngIf="todo.resolved != 1"> {{ todo.id }}. {{ todo.text }} [priority: {{ todo.priority }}]</li>
+  <li *ngIf="todo.resolved == 1" style="color:green;"> {{ todo.id }}. {{ todo.text }} [priority: {{ todo.priority }}]</li>
+</ul>
+
+{{ todos | json }}

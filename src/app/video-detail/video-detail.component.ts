@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Http } from '@angular/http';
 
 
 @Component({
@@ -10,37 +11,44 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class VideoDetailComponent implements OnInit, OnDestroy {
 
+  private req: any;
   private routeSub: any;
+  protected todayDate: Date;
   public slug: string;
   public embed: string;
-  protected todayDate: Date;
 
-  private menuList = {
-      'video-1': `62Mr0elsf0s`,
-      'video-2': `vGphzPLemZE`,
-      'video-3': ``,
-      'video-4': `EUtEqX-i1IY`,
-    };
+  private menuList: [any];
+  public todos: [any];
 
   constructor(private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) {}
+              private sanitizer: DomSanitizer,
+              private http: Http) {}
 
   ngOnInit(): void {
-    this.routeSub = this.route.params.subscribe(params => {
-      console.log(params);
-      this.slug = params['slug'];
-      this.embed = this.menuList[this.slug];
-      this.todayDate = new Date();
-      console.log(this.embed);
-    });
+    this.req = this.http.get('assets/json/videos.json')
+      .subscribe(data => {
+        this.menuList = data.json() as [any];
+        this.routeSub = this.route.params.subscribe(params => {
+          this.slug = params['slug'];
+          this.embed = this.menuList[this.slug];
+          this.todayDate = new Date();
+        });
+      });
+
+    this.req = this.http.get('http://localhost:8000/api/todo/task-list/3/')
+      .subscribe(data => {
+        console.log(data.json());
+        this.todos = data.json()['tasks'];
+        this.todos.forEach(item => console.log(item));
+      });
   }
 
   public getEmbedUrl(embedUrl: string) {
-    const url = `https://www.youtube.com/embed/${embedUrl}`;
-    return url;
+    return `https://www.youtube.com/embed/${embedUrl}`;
   }
 
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
+    this.req.unsubscribe();
   }
 }
