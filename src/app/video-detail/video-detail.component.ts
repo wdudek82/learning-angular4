@@ -1,13 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
+
+import { VideoService } from '../videos/videos.service';
 
 
 @Component({
   selector: 'app-video-detail',
   templateUrl: './video-detail.component.html',
-  styleUrls: ['./video-detail.component.css']
+  styleUrls: ['./video-detail.component.css'],
+  providers: [VideoService]
 })
 export class VideoDetailComponent implements OnInit, OnDestroy {
 
@@ -22,18 +25,33 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
-              private http: Http) {}
+              // private http: Http,
+              private _video: VideoService) {}
 
   ngOnInit(): void {
-    this.req = this.http.get('assets/json/videos.json')
+    this.req = this._video.list()
       .subscribe(data => {
-        this.menuList = data.json() as [any];
-        this.routeSub = this.route.params.subscribe(params => {
+        this.menuList = data as [any];
+
+        this.routeSub = this.route.params
+            .subscribe(params => {
           this.slug = params['slug'];
           this.embed = this.menuList[this.slug];
           this.todayDate = new Date();
         });
       });
+
+    // this.routeSub = this.route.params
+    //   .subscribe(params => {
+    //     this.todayDate = new Date();
+    //     this.slug = params['slug'];
+    //
+    //     this.req = this._video.get(this.slug)
+    //       .subscribe(item => {
+    //         console.log(item[0]);
+    //         this.embed = item[0];
+    //       });
+    //   });
 
     // this.req = this.http.get('http://localhost:8000/api/todo/task-list/3/')
     //   .subscribe(data => {
